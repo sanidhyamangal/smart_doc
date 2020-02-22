@@ -3,7 +3,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.validators import ValidationError
 from .predictions import predict_malaria
-
+from rest_framework import generics
+from .models import Patient, MalariaTest
+from .serializers import PatientSerializer, MalariaTestSerializer
 
 # create a view for the model performance
 class PredictMalaria(APIView):
@@ -28,3 +30,12 @@ class PredictMalaria(APIView):
         except Exception:
             return Response(data={'error': ['Provided image is not valid']},
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+class PatientList(generics.ListCreateAPIView):
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
+
+class PatientDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer

@@ -18,4 +18,6 @@ from main import views
 
 urlpatterns = [
     path('predictmalaria', views.PredictMalaria.as_view()),
+    path('patients', views.PatientList.as_view()),
+    path('patient/<pk>', views.PatientDetails.as_view())
 ]
