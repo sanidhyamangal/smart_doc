@@ -15,6 +15,9 @@ class PatientSerializer(serializers.ModelSerializer):
 
 # create a serializer for Malaria
 class MalariaTestSerializer(serializers.ModelSerializer):
+    patient = serializers.PrimaryKeyRelatedField(many=False, queryset=Patient.objects.all())
+    doctor = serializers.PrimaryKeyRelatedField(many=False, queryset=Doctor.objects.all())
+    test_result = serializers.ReadOnlyField()
 
     class Meta:
         model = MalariaTest

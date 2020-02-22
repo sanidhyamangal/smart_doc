@@ -1,6 +1,7 @@
-import tensorflow as tf  # for deep learning
 import base64  # for handling base64 images
 import os  # for performing os relatec work
+
+import tensorflow as tf  # for deep learning
 
 
 # function to malaria
@@ -26,4 +27,4 @@ def predict_malaria(base64image) -> bool:
 
     # predict image
     return model.predict(tf.reshape(image_to_predict, shape=[-1, 150, 150, 3
-                                                             ])) > 0
+                                                             ])) < 0
