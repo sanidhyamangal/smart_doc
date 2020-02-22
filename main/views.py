@@ -4,8 +4,9 @@ from rest_framework.response import Response
 from rest_framework.validators import ValidationError
 from .predictions import predict_malaria
 from rest_framework import generics
-from .models import Patient, MalariaTest
-from .serializers import PatientSerializer, MalariaTestSerializer
+from .models import Patient, MalariaTest, Doctor
+from .serializers import PatientSerializer, MalariaTestSerializer, DoctorSerializer
+
 
 # create a view for the model performance
 class PredictMalaria(APIView):
@@ -39,3 +40,11 @@ class PatientList(generics.ListCreateAPIView):
 class PatientDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+
+class DoctorList(generics.ListCreateAPIView):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+
+class DoctorDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
