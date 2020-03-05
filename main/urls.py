@@ -18,7 +18,7 @@ from django.urls import path
 from main import views
 
 urlpatterns = [
-    path('predictmalaria', views.PredictMalaria.as_view()),
+    # path('predictmalaria', views.PredictMalaria.as_view()),
     path('patients', views.PatientList.as_view()),
     path('patient/<pk>', views.PatientDetails.as_view()),
     path('doctors', views.DoctorList.as_view()),
