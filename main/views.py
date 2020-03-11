@@ -6,7 +6,6 @@ from rest_framework.validators import ValidationError
 from .models import Patient, MalariaTest, Doctor, PneumoniaTest
 from .predictions import predict_malaria, predict_pneumonia
 from .serializers import PatientSerializer, MalariaTestSerializer, DoctorSerializer, PneumoniaTestSerializer
-from rest_framework.views import APIView
 
 class PatientList(generics.ListCreateAPIView):
     queryset = Patient.objects.all()
@@ -23,6 +22,8 @@ class DoctorList(generics.ListCreateAPIView):
 class DoctorDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+
+#TODO: refactor code to prevent DRY.
 
 class MalariaTestList(generics.ListCreateAPIView):
     queryset = MalariaTest.objects.all()
@@ -44,15 +45,10 @@ class MalariaTestList(generics.ListCreateAPIView):
                             status=status.HTTP_400_BAD_REQUEST)
 
 class MalariaTestDetails(generics.RetrieveUpdateDestroyAPIView):
+    #TODO: update logic for update function
     queryset = MalariaTest.objects.all()
     serializer_class = MalariaTestSerializer
 
-# class Pneumonia(APIView):
-#     def post(self, request):
-#         if not self.request.data.get('base64image'):
-#             raise ValidationError({'base64image': ['base 64 image is required for processing the model']})
-#
-#         return Response(predict_pneumonia(self.request.data.get('base64image')), status=status.HTTP_200_OK)
 
 class PneumoniaTestList(generics.ListCreateAPIView):
     serializer_class = PneumoniaTestSerializer
@@ -74,5 +70,6 @@ class PneumoniaTestList(generics.ListCreateAPIView):
                             status=status.HTTP_400_BAD_REQUEST)
 
 class PneumoniaTestDetails(generics.RetrieveUpdateDestroyAPIView):
+    # TODO: update logic for update function
     serializer_class = PneumoniaTestSerializer
     queryset = PneumoniaTest.objects.all()
